@@ -287,7 +287,6 @@ intents.message_content = True
 
 
 bot.add_cog(Music(bot))
-access_token = os.environ['BOT_TOKEN']
 
 @bot.event
 async def on_ready():
@@ -296,6 +295,6 @@ async def on_ready():
 async def main():
     async with bot:
         await bot.add_cog(Music(bot))
-        await bot.start(access_token)
+        await bot.start(os.getenv('TOKEN'))
 
-bot.run(access_token) #토큰
+bot.run(os.getenv('TOKEN')) #토큰
