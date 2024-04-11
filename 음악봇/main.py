@@ -6,7 +6,7 @@ import asyncio
 import yt_dlp as youtube_dl
 import random
 from datetime import datetime
-from distoken import TOKEN
+import os
 
 
 now = datetime.now()
@@ -19,14 +19,7 @@ Stime = f"{str(now.hour)}시 {str(now.minute)}분 {str(now.second)}초"
 
 
 
-@bot.event
-async def on_ready():
-    print(f'We have logged in as {bot.user}')
 
-async def main():
-    async with bot:
-        await bot.add_cog(Music(bot))
-        await bot.start(TOKEN)
 
 
 
@@ -294,6 +287,15 @@ intents.message_content = True
 
 
 bot.add_cog(Music(bot))
+access_token = os.environ['BOT_TOKEN']
 
+@bot.event
+async def on_ready():
+    print(f'We have logged in as {bot.user}')
 
-bot.run(TOKEN) #토큰
+async def main():
+    async with bot:
+        await bot.add_cog(Music(bot))
+        await bot.start(access_token)
+
+bot.run(access_token) #토큰
